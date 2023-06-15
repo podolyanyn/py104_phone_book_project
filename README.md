@@ -4,7 +4,7 @@ team2
 For class Contact with atributes:
   - phone_number  - required
   - name          - required
-  - surname)      - not required
+  - surname				- not required
   - locality      - not required
   - email         - not required
   - social_media  - not required
