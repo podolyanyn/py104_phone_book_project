@@ -1,3 +1,5 @@
+from contact import *
+
 class PhoneBook:
     __slots__ = ('contacts',)
 
@@ -36,5 +38,25 @@ class PhoneBook:
     def remove_contact(self, contact=None):
         pass
 
-    def find_contact(self, contact=None):
-        pass
+    def find_contact(self, option):
+        found_list = []
+
+        for cont in self.contacts:
+            if cont.phone_number == option:
+                found_list.append(cont)
+            if cont.name.lower() == option.lower():
+                found_list.append(cont)
+            if cont.surname.lower() == option.lower():
+                found_list.append(cont)
+            if cont.locality.lower() == option.lower():
+                found_list.append(cont)
+            if cont.email.lower() == option.lower():
+                found_list.append(cont)
+            if cont.social_media.lower() == option.lower():
+                found_list.append(cont)
+
+        if len(found_list) == 0:
+            return None
+        else:
+            return found_list
+
