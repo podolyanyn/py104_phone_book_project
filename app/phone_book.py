@@ -45,17 +45,17 @@ class PhoneBook:
         option = input("Enter searching parameter: ")
         i = 0
         for cont in self.contacts:
-            if cont['phone_number'] == option:
+            if cont.phone_number == option:
                 print(cont)
-            if cont['name'].lower() == option.lower():
+            if cont.name.lower() == option.lower():
                 print(cont)
-            if cont['surname'].lower() == option.lower():
+            if cont.surname.lower() == option.lower():
                 print(cont)
-            if cont['locality'].lower() == option.lower():
+            if cont.locality.lower() == option.lower():
                 print(cont)
-            if cont['email'].lower() == option.lower():
+            if cont.email.lower() == option.lower():
                 print(cont)
-            if cont['social_media'].lower() == option.lower():
+            if cont.social_media.lower() == option.lower():
                 print(cont)
             else:
                 i += 1
