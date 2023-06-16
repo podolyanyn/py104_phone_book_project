@@ -39,26 +39,27 @@ class PhoneBook:
         pass
 
     def find_contact(self, contact=None):
-
+        found_list = []
         print("Input searching parameter "
               "(phone_number, name, surname, locality, email or social_media): '")
         option = input("Enter searching parameter: ")
-        i = 0
         for cont in self.contacts:
             if cont.phone_number == option:
-                print(cont)
+                found_list.append(cont)
             if cont.name.lower() == option.lower():
-                print(cont)
+                found_list.append(cont)
             if cont.surname.lower() == option.lower():
-                print(cont)
+                found_list.append(cont)
             if cont.locality.lower() == option.lower():
-                print(cont)
+                found_list.append(cont)
             if cont.email.lower() == option.lower():
-                print(cont)
+                found_list.append(cont)
             if cont.social_media.lower() == option.lower():
-                print(cont)
-            else:
-                i += 1
-        if i == len(self.contacts):
+                found_list.append(cont)
+
+        if len(found_list) == 0:
             print('Nothing found')
+            return None
+        else:
+            return found_list
 
