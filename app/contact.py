@@ -14,11 +14,17 @@ class Contact:
             raise AttributeError('Phone number must be provided!')
         if self.name is None:
             raise AttributeError('Name must be provided!')
-    
+
     def edit_contact(self, phone_number = None, name = None, surname = None, locality = None, email = None, social_media = None):
         pass
     
+    def __str__(self):
+        return f'phone_number: {self.phone_number}, name: {self.name}, surname: {self.surname}, locality: {self.locality},' \
+               f'email: {self.email}, social_media: {self.social_media}'
+
     def get_info(self):
-        pass
+        print(self.__str__())
+
+
 
 
