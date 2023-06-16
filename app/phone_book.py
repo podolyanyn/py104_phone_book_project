@@ -1,3 +1,5 @@
+from contact import *
+
 class PhoneBook:
     __slots__ = ('contacts',)
 
@@ -37,4 +39,26 @@ class PhoneBook:
         pass
 
     def find_contact(self, contact=None):
-        pass
+
+        print("Input searching parameter "
+              "(phone_number, name, surname, locality, email or social_media): '")
+        option = input("Enter searching parameter: ")
+        i = 0
+        for cont in self.contacts:
+            if cont['phone_number'] == option:
+                print(cont)
+            if cont['name'].lower() == option.lower():
+                print(cont)
+            if cont['surname'].lower() == option.lower():
+                print(cont)
+            if cont['locality'].lower() == option.lower():
+                print(cont)
+            if cont['email'].lower() == option.lower():
+                print(cont)
+            if cont['social_media'].lower() == option.lower():
+                print(cont)
+            else:
+                i += 1
+        if i == len(self.contacts):
+            print('Nothing found')
+
