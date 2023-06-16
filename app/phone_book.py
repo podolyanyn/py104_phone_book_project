@@ -38,11 +38,9 @@ class PhoneBook:
     def remove_contact(self, contact=None):
         pass
 
-    def find_contact(self, contact=None):
+    def find_contact(self, option):
         found_list = []
-        print("Input searching parameter "
-              "(phone_number, name, surname, locality, email or social_media): '")
-        option = input("Enter searching parameter: ")
+
         for cont in self.contacts:
             if cont.phone_number == option:
                 found_list.append(cont)
@@ -58,7 +56,6 @@ class PhoneBook:
                 found_list.append(cont)
 
         if len(found_list) == 0:
-            print('Nothing found')
             return None
         else:
             return found_list
