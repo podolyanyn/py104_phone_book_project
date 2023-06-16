@@ -22,5 +22,10 @@ class Contact:
                     social_media = None):
         pass
 
+    def __str__(self):
+
+        return f'phone_number: {self.phone_number}, name: {self.name}, surname: {self.surname}, locality: {self.locality},' \
+               f'email: {self.email}, social_media: {self.social_media}'
+
     def get_info(self):
-        pass
+        print(self.__str__())
