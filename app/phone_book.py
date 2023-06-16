@@ -60,3 +60,15 @@ class PhoneBook:
         else:
             return found_list
 
+    def get_contact_info(self):
+
+        print("To get contact's information please enter contact parameter "
+              "to search: phone number, name, surname, locality, email or social_media")
+        search_data = input("Enter the parameter to search: ")
+
+        rez = self.find_contact(search_data)
+
+        if rez == None:
+            print('Nothing found')
+        else:
+            print(rez)
