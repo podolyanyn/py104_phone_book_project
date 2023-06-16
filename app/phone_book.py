@@ -1,8 +1,11 @@
 class PhoneBook:
     __slots__ = ('contacts',)
 
-    def __init__(self, contacts=[]):
-        self.constacts = []
+    def __init__(self, contacts=None):
+        if contacts is None:
+            self.contacts = []
+        else:
+            self.contacts = contacts
 
     def add_contact(self, contact=None):
 
@@ -32,5 +35,6 @@ class PhoneBook:
 
     def remove_contact(self, contact=None):
         pass
+
     def find_contact(self, contact=None):
         pass
