@@ -71,4 +71,5 @@ class PhoneBook:
         if rez == None:
             print('Nothing found')
         else:
-            print(rez)
+            for cont in rez:
+                print(cont)
