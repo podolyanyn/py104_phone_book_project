@@ -15,6 +15,7 @@ class Contact:
         self.email = self._validate_email(email)
         self.social_media = links
         self.black_list_status = black_list_status
+        Contact.all_contacts.append(self)
 
     def _validate_phone_number(self, phone_number):
         for number in phone_number:
