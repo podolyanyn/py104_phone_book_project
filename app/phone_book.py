@@ -1,5 +1,6 @@
 from contact import *
 
+
 class PhoneBook:
     __slots__ = ('contacts',)
 
@@ -22,7 +23,7 @@ class PhoneBook:
             option = input("Enter option number: ")
 
             if option == "1":
-                self.remove_contact(existing_contact.phone_number)
+                self.delete_contact(existing_contact.phone_number)
                 self.contacts.append(contact)
                 print("New contact was added successfully.")
 
@@ -35,30 +36,31 @@ class PhoneBook:
             self.contacts.append(contact)
             print("Contact was added successfully.")
 
-    def remove_contact(self, contact=None):
-        pass
+    def search_contact(self, contact_identifier):
+        for contact in self.contacts:
+            if contact.phone_number == contact_identifier:
+                return contact
+            if contact.name.lower() == contact_identifier.lower():
+                return contact
+            if contact.surname.lower() == contact_identifier.lower():
+                return contact
+            if contact.locality.lower() == contact_identifier.lower():
+                return contact
+            if contact.email.lower() == contact_identifier.lower():
+                return contact
+            if contact.social_media.lower() == contact_identifier.lower():
+                return contact
 
-    def find_contact(self, option):
-        found_list = []
+        return None
 
-        for cont in self.contacts:
-            if cont.phone_number == option:
-                found_list.append(cont)
-            if cont.name.lower() == option.lower():
-                found_list.append(cont)
-            if cont.surname.lower() == option.lower():
-                found_list.append(cont)
-            if cont.locality.lower() == option.lower():
-                found_list.append(cont)
-            if cont.email.lower() == option.lower():
-                found_list.append(cont)
-            if cont.social_media.lower() == option.lower():
-                found_list.append(cont)
+    def delete_contact(self, contact_identifier):
+        contact = self.search_contact(contact_identifier)
 
-        if len(found_list) == 0:
-            return None
+        if contact:
+            self.contacts.remove()
+            print("Contact has been successfully deleted.")
         else:
-            return found_list
+            print("Contact not found.")
 
     def get_contact_info(self):
 
@@ -66,9 +68,9 @@ class PhoneBook:
               "to search: phone number, name, surname, locality, email or social_media")
         search_data = input("Enter the parameter to search: ")
 
-        rez = self.find_contact(search_data)
+        rez = self.search_contact(search_data)
 
-        if rez == None:
+        if rez is None:
             print('Nothing found')
         else:
             for cont in rez:
