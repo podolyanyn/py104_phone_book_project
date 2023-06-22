@@ -3,7 +3,7 @@ import re
 
 
 class Contact:
-
+    all_contacts = []
     __slots__ = ('phone_number', 'name', 'surname', 'locality', 'email', 'social_media', 'black_list_status')
 
     def __init__(self, phone_number: List[str], name: str, surname: str = None, city: str = None,
@@ -15,6 +15,7 @@ class Contact:
         self.email = self._validate_email(email)
         self.social_media = links
         self.black_list_status = black_list_status
+        Contact.all_contacts.append(self)
 
     def _validate_phone_number(self, phone_number):
         for number in phone_number:
@@ -53,3 +54,18 @@ class Contact:
 
     def get_info(self):
         print(self.__str__())
+
+    def add_to_black_list(self):
+        self.black_list_status = True
+        return self.black_list_status
+
+    def remove_from_black_list(self):
+        self.black_list_status = False
+        return self.black_list_status
+
+    @staticmethod
+    def _check_unique_number(number):
+        for contact in Contact.all_contacts:
+            if number in contact.phone_number:
+                return contact
+        return True
