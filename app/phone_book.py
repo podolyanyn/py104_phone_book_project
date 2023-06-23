@@ -1,4 +1,4 @@
-from contact import *
+import json
 
 
 class PhoneBook:
@@ -37,27 +37,29 @@ class PhoneBook:
             print("Contact was added successfully.")
 
     def search_contact(self, contact_identifier):
+        found_contacts = []
+
         for contact in self.contacts:
             if contact.phone_number == contact_identifier:
-                return contact
-            if contact.name.lower() == contact_identifier.lower():
-                return contact
-            if contact.surname.lower() == contact_identifier.lower():
-                return contact
-            if contact.locality.lower() == contact_identifier.lower():
-                return contact
-            if contact.email.lower() == contact_identifier.lower():
-                return contact
-            if contact.social_media.lower() == contact_identifier.lower():
-                return contact
+                found_contacts.append(contact)
+            elif contact.name.lower() == contact_identifier.lower():
+                found_contacts.append(contact)
+            elif contact.surname and contact.surname.lower() == contact_identifier.lower():
+                found_contacts.append(contact)
+            elif contact.locality and contact.locality.lower() == contact_identifier.lower():
+                found_contacts.append(contact)
+            elif contact.email and contact.email.lower() == contact_identifier.lower():
+                found_contacts.append(contact)
+            elif contact.social_media and contact.social_media.lower() == contact_identifier.lower():
+                found_contacts.append(contact)
 
-        return None
+        return found_contacts
 
     def delete_contact(self, contact_identifier):
         contact = self.search_contact(contact_identifier)
 
         if contact:
-            self.contacts.remove()
+            self.contacts.remove(contact)
             print("Contact has been successfully deleted.")
         else:
             print("Contact not found.")
@@ -75,3 +77,27 @@ class PhoneBook:
         else:
             for cont in rez:
                 print(cont)
+
+    def export_records_to_json(self, filename):
+        if not self.contacts:
+            print("Нет записей для экспорта.")
+            return
+
+        json_data = []
+        for contact in self.contacts:
+            contact_data = {
+                "phone_number": contact.phone_number,
+                "name": contact.name,
+                "surname": contact.surname,
+                "locality": contact.locality,
+                "email": contact.email,
+                "social_media": contact.social_media
+            }
+            json_data.append(contact_data)
+
+        try:
+            with open(filename, "w") as file:
+                json.dump(json_data, file, indent=4)
+            print(f"Записи успешно экспортированы в файл {filename}.")
+        except IOError:
+            print("Ошибка при сохранении файла.")
