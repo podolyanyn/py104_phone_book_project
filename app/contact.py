@@ -69,3 +69,12 @@ class Contact:
             if number in contact.phone_number:
                 return contact
         return True
+
+    @staticmethod
+    def save_contacts():
+        all_contacts_from_dicts = []
+        for index, contact in enumerate(Contact.all_contacts):
+            dictionary = {index + 1: contact}
+            all_contacts_from_dicts.append(dictionary)
+        with open('contacts.json', 'w') as file:
+            json.dump(all_contacts_from_dicts, file)
