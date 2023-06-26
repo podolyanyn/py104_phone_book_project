@@ -1,0 +1,50 @@
+[
+    {
+        "phone_number": "380987654321",
+        "name": "Jane",
+        "surname": "Smith",
+        "locality": "London",
+        "email": [
+            "jane.smith@example.com"
+        ],
+        "social_media": [
+            "twitter.com/janesmith"
+        ]
+    },
+    {
+        "phone_number": "380971234567",
+        "name": "Bob",
+        "surname": "Johnson",
+        "locality": "Paris",
+        "email": [
+            "bob.johnson@example.com"
+        ],
+        "social_media": [
+            "linkedin.com/bobjohnson"
+        ]
+    },
+    {
+        "phone_number": "380951234567",
+        "name": "John",
+        "surname": "Doe",
+        "locality": "New York",
+        "email": [
+            "john.doe@example.com"
+        ],
+        "social_media": [
+            "linkedin.com/johndoe"
+        ]
+    },
+    {
+        "phone_number": "380961234567",
+        "name": "Jane",
+        "surname": "Smith",
+        "locality": "London",
+        "email": [
+            "jane.smith@example.com"
+        ],
+        "social_media": [
+            "linkedin.com/janesmith"
+        ]
+    }
+]

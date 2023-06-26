@@ -23,12 +23,12 @@ class PhoneBook:
             option = input("Enter option number: ")
 
             if option == "1":
-                self.delete_contact(existing_contact.phone_number)
+                self.delete_contact(existing_contact)
                 self.contacts.append(contact)
                 print("New contact was added successfully.")
 
             elif option == "2":
-                self.edit_contact(existing_contact.phone_number, contact)
+                self.edit_contact(existing_contact, contact)
                 print("Contact was edited successfully.")
             else:
                 print("Creation of the new contact was cancelled.")
@@ -39,30 +39,41 @@ class PhoneBook:
     def search_contact(self, contact_identifier):
         found_contacts = []
 
+        # Удаление символа "+" из введенного номера, если присутствует
+        if contact_identifier.startswith('+'):
+            contact_identifier = contact_identifier[1:]
+        # Проверка формата введенного номера
+        if len(contact_identifier) == 9:
+            # Добавление префикса "380" к введенному номеру
+            contact_identifier = '380' + contact_identifier
+        elif len(contact_identifier) == 10:
+            # Добавление префикса "38" к введенному номеру
+            contact_identifier = '38' + contact_identifier
+        elif not contact_identifier.startswith('380'):
+            contact_identifier = '380' + contact_identifier
+
         for contact in self.contacts:
-            if contact.phone_number == contact_identifier:
-                found_contacts.append(contact)
-            elif contact.name.lower() == contact_identifier.lower():
-                found_contacts.append(contact)
-            elif contact.surname and contact.surname.lower() == contact_identifier.lower():
-                found_contacts.append(contact)
-            elif contact.locality and contact.locality.lower() == contact_identifier.lower():
-                found_contacts.append(contact)
-            elif contact.email and contact.email.lower() == contact_identifier.lower():
-                found_contacts.append(contact)
-            elif contact.social_media and contact.social_media.lower() == contact_identifier.lower():
+            if contact.phone_number == contact_identifier or \
+                    contact.phone_number.startswith(contact_identifier) or \
+                    contact.name == contact_identifier or \
+                    contact.surname == contact_identifier or \
+                    contact.locality == contact_identifier or \
+                    (contact.email and contact_identifier in contact.email) or \
+                    (contact.social_media and contact_identifier in contact.social_media):
                 found_contacts.append(contact)
 
         return found_contacts
 
-    def delete_contact(self, contact_identifier):
-        contact = self.search_contact(contact_identifier)
-
-        if contact:
+    def delete_contact(self, contact):
+        if contact in self.contacts:
             self.contacts.remove(contact)
             print("Contact has been successfully deleted.")
         else:
             print("Contact not found.")
+
+    def edit_contact(self, existing_contact, new_contact):
+        self.contacts.remove(existing_contact)
+        self.contacts.append(new_contact)
 
     def get_contact_info(self):
 
@@ -81,7 +92,7 @@ class PhoneBook:
     def export_records_to_json(self, filename):
         if not self.contacts:
             print("Нет записей для экспорта.")
-            return
+            return False
 
         json_data = []
         for contact in self.contacts:
@@ -98,6 +109,9 @@ class PhoneBook:
         try:
             with open(filename, "w") as file:
                 json.dump(json_data, file, indent=4)
-            print(f"Записи успешно экспортированы в файл {filename}.")
+            print(f"Records successfully exported to a file {filename}.")
+            return True
         except IOError:
-            print("Ошибка при сохранении файла.")
+            print("Error when saving the file.")
+            return False
+
