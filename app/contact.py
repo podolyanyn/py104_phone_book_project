@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 import re
 
 
@@ -6,7 +6,7 @@ class Contact:
     all_contacts = []
     __slots__ = ('phone_number', 'name', 'surname', 'locality', 'email', 'social_media', 'black_list_status')
 
-    def __init__(self, phone_number: List[str], name: str, surname: str = None, city: str = None,
+    def __init__(self, phone_number: str, name: str, surname: str = None, city: str = None,
                  email: List[str] = None, links: List[str] = None, black_list_status: bool = False):
         self.phone_number = self._validate_phone_number(phone_number)
         self.name = self._validate_name(name)
@@ -17,10 +17,16 @@ class Contact:
         self.black_list_status = black_list_status
         Contact.all_contacts.append(self)
 
-    def _validate_phone_number(self, phone_number):
-        for number in phone_number:
-            if not number.startswith("+380") or len(number) != 13:
-                raise ValueError("Invalid phone number format. Use this format: +380123457283 ")
+    def _validate_phone_number(self, phone_number: str) -> str:
+        phone_number = re.sub(r'\D', '', phone_number)  # Remove non-digit characters from the phone number
+        if phone_number.startswith('0'):  # Remove leading zero
+            phone_number = phone_number[1:]
+
+        if len(phone_number) == 10:  # Add country code if missing
+            phone_number = '380' + phone_number
+        elif len(phone_number) > 12 or not phone_number.isdigit():
+            raise ValueError("Invalid phone number format. Use this format: +380123457283")
+
         return phone_number
 
     def _validate_name(self, name):
