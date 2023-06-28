@@ -113,3 +113,8 @@ The search_contact method searches for contacts in the phonebook based on the gi
 * The method then iterates through all contacts in the phonebook and compares each contact to the search ID. If the contact matches the ID, it is added to the found_contacts list.
 
 * Finally, the method returns the found_contacts list containing all found contacts matching the search ID.
+
+### Translating our programme to the django platform ()
+
+We implement the models based on the Contact, PhoneNumber classes
+
