@@ -1,0 +1,12 @@
+{% extends 'phonebook_app/base.html' %}
+
+{% block content %}
+    <h1>Contact Detail</h1>
+    <p><strong>Name:</strong> {{ contact.name }}</p>
+    <p><strong>Surname:</strong> {{ contact.surname }}</p>
+    <p><strong>Phone Number:</strong> {{ contact.phone_number.number }}</p>
+    <p><strong>Locality:</strong> {{ contact.locality }}</p>
+    <p><strong>Email:</strong> {{ contact.email }}</p>
+    <p><strong>Social Media:</strong> {{ contact.social_media }}</p>
+    <p><strong>Blacklist Status:</strong> {{ contact.black_list_status }}</p>
+{% endblock %}
